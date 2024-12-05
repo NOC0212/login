@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <title>登入</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <section>
+    <div class="form-box">
+      <div class="form-value">
+        <form id="loginForm">
+          <h2>登入網頁</h2>
+          <div class="inputbox">
+            <input type="text" id="username" required>
+            <label for="username">提取碼</label>
+          </div>
+          <div class="inputbox">
+            <input type="password" id="password" required>
+            <label for="password">密碼</label>
+          </div>
+          <div class="forget">
+            <label>
+              <p>忘記 <a href="#">密碼</a></p>
+            </label>
+          </div>
+          <button type="submit">提取內容</button>
+          <div class="register">
+            <p>沒有詢問碼？ <a href="#">索取</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();  // 防止表單提交
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // 定義多組帳號和密碼對應的網頁
+      const validUsers = [
+        { username: 'codm', password: '2244', redirect: 'https://noc0212.github.io/codms/codm.html' },
+        { username: 'battlecat', password: '11441', redirect: 'https://noc0212.github.io/codms/page2.html' },
+        { username: 'yoyang0531', password: '224033244', redirect: 'https://noc0212.github.io/codms/' },
+      ];
+
+      // 檢查使用者輸入的帳號和密碼是否匹配
+      const user = validUsers.find(user => user.username === username && user.password === password);
+
+      if (user) {
+        alert('提取成功！');
+        // 根據使用者的帳號跳轉到對應的頁面
+        window.location.href = user.redirect;
+      } else {
+        alert('提取碼或密碼錯誤！');
+      }
+    });
+    // 禁用 F12 和 Ctrl+Shift+I (開發者工具)
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
+    event.preventDefault();
+  }
+});
+
+// 禁用右鍵點擊
+document.addEventListener('contextmenu', function (event) {
+  event.preventDefault();
+});
+
+  </script>
+
+</body>
+</html>
